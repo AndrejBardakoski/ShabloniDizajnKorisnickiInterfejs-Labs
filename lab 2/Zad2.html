@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zad2</title>
+
+    <style type="text/css">
+        body {
+            background-color: #ece8e5;
+        }
+
+        #NavBar {
+            height: 40px;
+            width: 100%;
+            background: #455868;
+            font-size: 11pt;
+            font-family: 'PT Sans', Arial, sans-serif;
+            font-weight: bold;
+            position: relative;
+            border-bottom: 2px solid #283744;
+        }
+
+        #NavBar div {
+            padding: 0;
+            margin: 0 auto;
+            width: 750px;
+            height: 40px;
+        }
+
+        #NavBar span {
+            display: inline;
+            float: left;
+            color: #fff;
+            /*display: inline-block;*/
+            width: 150px;
+            text-align: center;
+            text-decoration: none;
+            line-height: 40px;
+            text-shadow: 1px 1px 0px #283744;
+            border-right: 1px solid #576979;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+
+        #NavBar span:last-child {
+            border-right: 0;
+        }
+
+        #NavBar span:hover {
+            background-color: #8c99a4;
+            cursor: pointer;
+        }
+
+        #NavBar .active {
+            background: #5a7288;
+        }
+        #Content{background:#eef; padding: 5px; border:1px gray dotted; font-size: 1.4em; text-align: center}
+        /*nav a#pull {*/
+        /*    display: none;*/
+        /*}*/
+
+    </style>
+    <link href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" rel="stylesheet">
+    <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
+            integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c="
+            crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Content div').hide();
+            $('#Page-0').show();
+
+            $('#NavBar span').click(function () {
+                var divId = $(this).attr('title');
+                $('#Content div').hide();
+                $(divId).show();
+                $('#NavBar span').removeClass("active");
+                $(this).addClass("active");
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div id="NavBar">
+    <div id="Nav-container">
+        <span title="#Page-1">food-and-drink</span>
+        <span title="#Page-2">electronics</span>
+        <span title="#Page-3">home-andgarden</span>
+        <span title="#Page-4">about us</span>
+        <span title="#Page-5">contact</span>
+    </div>
+</div>
+<div id="Content">
+    <div id="Page-0">
+        <h1>
+            My hypermarket
+        </h1>
+    </div>
+    <div id="Page-1">
+        <p>Etiam vel nibh mi. Curabitur porta porta lorem, eu laoreet est molestie in. Morbi eleifend in nibh fringilla
+            vehicula. Nam iaculis auctor faucibus. Curabitur elementum elementum molestie. Nunc vestibulum, sem nec
+            tempus porttitor, odio nisl condimentum tortor, eu luctus ligula massa nec sem. Nunc sollicitudin semper
+            feugiat. Donec metus ligula, maximus non scelerisque eu, blandit vitae quam. </p>
+        <p>Cras massa mauris, egestas vitae condimentum sed, aliquam nec enim. Nullam metus enim, ultrices sed fermentum
+            non, maximus quis leo. Cras ultrices, quam sed sollicitudin semper, erat nulla finibus magna, ut tincidunt
+            dui elit sed lacus. Vivamus molestie justo id risus tempor, id tristique mauris elementum. Vivamus
+            vestibulum nec ante non pretium. Sed pretium pharetra nisi, vitae suscipit mauris vulputate non. Phasellus
+            varius turpis eu nulla dapibus malesuada. Mauris volutpat magna in tristique molestie. Pellentesque sit amet
+            mi blandit, mattis diam sit amet, porttitor ligula. Nulla egestas mi nunc, vel luctus lectus gravida eget.
+            Morbi vel leo ac felis viverra pellentesque. Ut rutrum elit nec lacinia cursus. Phasellus iaculis ante a
+            purus iaculis, vel luctus neque mollis. Morbi ut turpis tortor. Pellentesque tincidunt, ligula sed ultrices
+            ornare, quam purus tristique lorem, a consectetur arcu mauris id metus.</p>
+    </div>
+    <div id="Page-2">
+        <p>Aliquam erat volutpat. Mauris finibus, enim a mattis venenatis, mi tellus vehicula nunc, eget feugiat lacus
+            lorem sed diam. Pellentesque scelerisque ex ut condimentum cursus. Duis nulla nunc, fermentum sit amet ex
+            id, euismod congue elit. Sed id mattis nunc. Maecenas nec pharetra odio, id pharetra felis. Phasellus
+            maximus mollis mi in pretium. Sed non pulvinar nunc, sit amet hendrerit lacus.</p>
+        <p>Mauris finibus pretium leo molestie viverra. Sed consectetur mattis ex, eget convallis tellus sagittis eget.
+            Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam fringilla
+            vulputate lorem, a blandit dolor pharetra eget. Suspendisse accumsan auctor molestie. Suspendisse diam elit,
+            convallis sit amet augue et, viverra accumsan velit. Aliquam aliquet, dui vel rutrum semper, magna magna
+            auctor nulla, id scelerisque mauris lorem id elit. Class aptent taciti sociosqu ad litora torquent per
+            conubia nostra, per inceptos himenaeos. Quisque dapibus cursus sapien, sit amet auctor lacus tristique id.
+            Phasellus magna erat, viverra sit amet urna cursus, pellentesque feugiat lacus. Ut mollis lorem eros, vitae
+            porttitor ex vestibulum in. Praesent tincidunt lectus vitae consectetur dignissim. Maecenas mattis augue ac
+            ex congue tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Nulla accumsan egestas enim. Duis imperdiet egestas lobortis. Vivamus vestibulum blandit arcu nec ultricies.
+            Quisque tellus urna, tincidunt non ex et, faucibus interdum eros. Cras a elit non dui placerat ornare id eu
+            mauris. Sed et nunc non ex dapibus consequat eget id urna. Vestibulum sed arcu eleifend, volutpat risus ac,
+            accumsan tellus. Pellentesque vestibulum tellus ut eros porttitor egestas. Donec ac mollis nunc.</p>
+    </div>
+    <div id="Page-3">
+        <p>Praesent molestie id augue sed rhoncus. Nam blandit justo eget posuere congue. Quisque rutrum
+            pulvinar dui et imperdiet. Aenean ut porttitor mi, a ultricies tortor. Fusce sed lacinia nisi. Praesent
+            dapibus, sapien et efficitur tempus, metus justo tristique ipsum, pellentesque tincidunt ex diam id elit.
+            Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus id
+            fringilla sapien, eget condimentum nisi.</p>
+        <p>Aenean rutrum maximus velit non varius. Morbi dictum mattis ipsum ut tempus. Fusce ac dolor ut nulla
+            fringilla mattis et non nulla. Donec sed felis tellus. Ut lectus eros, placerat porta lectus sit amet,
+            tristique gravida enim. Aliquam mollis metus vel fermentum egestas. In id iaculis diam, in placerat lorem.
+            In suscipit sollicitudin viverra. Ut quis elementum lorem. Aliquam erat volutpat. Ut pretium sem vel urna
+            laoreet, quis rhoncus purus dictum. Praesent volutpat suscipit mi, quis posuere felis ultrices et.
+            Vestibulum id dapibus ex, vitae eleifend mauris. Phasellus eget suscipit est.</p>
+    </div>
+    <div id="Page-4"><p>Phasellus ac venenatis eros. Proin vulputate commodo mauris id pretium. Curabitur eget orci eget
+        libero aliquam iaculis. Praesent libero nisi, blandit non elit in, congue aliquam magna. Sed lorem ante,
+        imperdiet non ligula eu, aliquam maximus leo. Sed orci metus, semper quis gravida eu, placerat nec sapien.
+        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque sapien
+        tellus, volutpat eu urna vel, convallis rutrum justo. Aliquam erat volutpat. Suspendisse eu nisl sed lorem
+        pharetra pharetra sit amet vitae mauris. Nullam semper tellus a metus faucibus laoreet. Aliquam aliquam libero
+        sit amet convallis eleifend. Quisque blandit lectus id tellus fringilla, ut luctus velit rutrum. Nullam ut
+        tincidunt nulla, eu tincidunt velit. Maecenas at turpis congue, sodales nisl quis, vehicula mauris. Quisque
+        elementum tincidunt lorem, vel elementum augue posuere ac.</p></div>
+    <div id="Page-5"><p>Phasellus rhoncus libero sed lorem auctor, quis auctor lorem maximus. In rutrum metus id sodales
+        laoreet. Suspendisse malesuada nulla sit amet egestas porta. Nunc suscipit tempor enim malesuada iaculis. Cras
+        et neque vulputate, sagittis mi vitae, pharetra nibh. Suspendisse nec orci arcu. Pellentesque sit amet mauris
+        vehicula, cursus dui eget, molestie risus. Integer ullamcorper vel nisl in accumsan. Proin eu massa quis ipsum
+        mollis pulvinar. Donec sed ante sollicitudin, dapibus felis auctor, pharetra eros. Phasellus sed elementum
+        justo, et placerat lectus. Aliquam mattis vel turpis eget semper. Morbi purus urna, condimentum tempor
+        consectetur et, tempor sed est. Cras sit amet ipsum non arcu molestie convallis luctus ut magna.</p></div>
+</div>
+</body>
+</html>

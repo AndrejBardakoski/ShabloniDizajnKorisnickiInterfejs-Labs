@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zad 2</title>
+
+    <style type="text/css">
+        table, th, td {
+            border-collapse: collapse;
+            border: 2px solid;
+        }
+
+        #modal {
+            margin: 15px 5px;
+        }
+    </style>
+
+    <link href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" rel="stylesheet">
+    <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
+            integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c="
+            crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#dialog").dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    Add: function () {
+                        var row = document.createElement("tr")
+                        var book = document.createElement("td")
+                        var author = document.createElement("td")
+                        var comment = document.createElement("td")
+
+                        book.innerText = $("#book-title-input").val()
+                        author.innerText = $("#author-name-input").val()
+                        comment.innerText = $("#user-comment-input").val()
+
+                        row.append(book, author, comment)
+                        $("#tHead").after(row)
+
+                        $("#dialog").dialog("close");
+                    }
+                }
+            });
+
+            $("#modal").click(function () {
+                $("#dialog").dialog("open");
+            });
+        });
+    </script>
+</head>
+
+<body>
+<h1>Book Recomendations</h1>
+<input type="button" id="modal" value="Add Book"/>
+<table id="content">
+    <tr id="tHead">
+        <th>
+            Book Title:
+        </th>
+        <th>
+            Author Name:
+        </th>
+        <th>
+            comment:
+        </th>
+    </tr>
+</table>
+
+<div id="dialog" title="Sample">
+    <p>Enter book title below:</p>
+    <input id="book-title-input" type="text"/>
+    <p>Enter author name below:</p>
+    <input id="author-name-input" type="text"/>
+    <p>Enter comment below:</p>
+    <input id="user-comment-input" type="text"/>
+</div>
+</body>
+</html>

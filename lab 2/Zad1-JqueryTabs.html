@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" rel="stylesheet">
+    <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
+            integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c="
+            crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#tabs").tabs();
+        });
+    </script>
+</head>
+<body>
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Open Start</a></li>
+        <li><a href="#tabs-2">Connect</a></li>
+        <li><a href="#tabs-3">Pin Tabs</a></li>
+    </ul>
+    <div id="tabs-1">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut efficitur enim in ipsum imperdiet aliquam.
+            Nulla
+            felis augue, hendrerit eget sollicitudin in, sollicitudin vel nisl. Quisque risus elit, pharetra a lorem
+            quis, ornare auctor nunc. Pellentesque placerat vehicula purus sed commodo. Proin mollis, justo eu
+            semper
+            iaculis, erat justo consectetur lorem, eu sodales quam lacus vel urna. Proin at sem tincidunt, gravida
+            sapien non, ornare enim. Ut dictum tempus fringilla.</p>
+    </div>
+    <div id="tabs-2">
+        <p>Praesent tempus vulputate tellus, et volutpat arcu rutrum ac. Nullam vulputate lacinia lacus sit amet
+            aliquet. Nunc gravida libero id justo semper, eget molestie tortor fringilla. Vivamus massa leo, blandit
+            eget sapien a, scelerisque ullamcorper risus. Quisque ornare in urna vel ornare. In scelerisque finibus
+            est
+            eu varius. Nam ac viverra augue, ac convallis nisl.</p>
+    </div>
+    <div id="tabs-3">
+        <p>Nam placerat sapien eu interdum fermentum. Integer molestie tortor at leo sollicitudin luctus. Sed sed
+            urna urna. Maecenas molestie metus sit amet elementum porta. Proin rutrum, quam sit amet scelerisque
+            lobortis, dui tellus hendrerit justo, nec auctor eros sapien ut odio. Donec vitae arcu a est dictum
+            aliquam at non lacus. Fusce ac pellentesque turpis, at finibus mauris.</p>
+    </div>
+</div>
+</body>
+</html>
