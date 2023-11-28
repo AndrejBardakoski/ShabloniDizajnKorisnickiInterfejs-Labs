@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zad 2 form X-factor</title>
+    <script>
+        function validate() {
+            name = document.getElementById("name").value
+            artistName = document.getElementById("ArtistName").value
+            radioBtns = document.getElementsByName("Gender")
+            gender = null
+            if (radioBtns[0].checked)
+                gender = radioBtns[0].value
+            else if (radioBtns[1].checked)
+                gender = radioBtns[1].value
+            genresAll = document.querySelectorAll("#Genre>option")
+            genre = null
+            for (i = 0; i < genresAll.length; i++) {
+                if (genresAll[i].selected)
+                    genre = genresAll[i].value
+            }
+            if (name && artistName && gender && genre)
+                alert(name + ", " + artistName + ", " + gender + ", " + genre)
+            else
+                alert("Сите полиња се задолжителни")
+        }
+    </script>
+</head>
+<body>
+<h1>Форма за пријавување на X-Factor</h1>
+<form>
+    <form>
+        <div>
+            <span>Име:</span>
+            <input type="text" id="name" name="name">
+        </div>
+        <div>
+            <span>Уметничко име:</span>
+            <input type="text" id="ArtistName" name="ArtistName"><br>
+        </div>
+        <div>
+            <span>Пол:</span>
+            <input type="radio" id="radioMale" name="Gender" value="Машки">
+            <input type="radio" id="radioFemale" name="Gender" value="Женски">
+        </div>
+        <div>
+            <span>Жанр:</span>
+            <select name="Genre" id="Genre">
+                <option value="Classical music">Classical music</option>
+                <option value="Pop">Pop</option>
+                <option value="Rock">Rock</option>
+                <option value="Rap">Rap</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <input type="button" value="Пријави се" onClick="validate()">
+    </form>
+</form>
+</body>
+</html>

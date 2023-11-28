@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zad 1 Countdown Timer</title>
+</head>
+<body>
+<h1>Time remaining</h1>
+<h2 id="Timer"></h2>
+<script>
+    function UpdateTimer() {
+        var dateNow = new Date();
+        dateNow.getHours()
+        hoursLeft = 23 - dateNow.getHours();
+        minutesLeft = 59 - dateNow.getMinutes();
+        secondsLeft = 60 - dateNow.getSeconds();
+        document.getElementById("Timer").innerHTML = hoursLeft+":"+minutesLeft+":"+secondsLeft;
+
+        setTimeout("UpdateTimer()", 1000);
+    }
+    UpdateTimer();
+</script>
+</body>
+</html>

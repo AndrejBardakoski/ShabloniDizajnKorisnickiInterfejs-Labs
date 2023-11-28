@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zad4 list jquery</title>
+    <script type='text/javascript' src='jquery.js'></script>
+    <style>
+        .urlBold{
+            font-weight:bold;
+            color: #0000FF;
+        }
+    </style>
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $("li").addClass("urlBold");
+        });
+        function change(){
+            if($("ol li").hasClass("urlBold"))
+                $("ol li").removeClass("urlBold");
+            else
+                $("ol li").addClass("urlBold");
+        }
+    </script>
+</head>
+<body>
+<ul id="list">
+    <li>Logo-Photo</li>
+    <ol type="I">
+        <li>url - thumbnail: www.sth.com/GAVassdfSJFKBAFsadfdsg</li>
+        <li>url-icon: www.sth.com/GAVassdfSJFKBAFsadfdsg</li>
+        <li>url-default: www.sth.com/GAVassdfSJFKBAFsadfdsg</li>
+    </ol>
+    <li>Header-Photo</li>
+    <ol type="I">
+        <li>url - thumbnail: www.sth.com/GAVassdfSJFKBAFsadfdsg</li>
+        <li>url-icon: www.sth.com/GAVassdfSJFKBAFsadfdsg</li>
+        <li>url-default: www.sth.com/GAVassdfSJFKBAFsadfdsg</li>
+    </ol>
+    <li>Footer-Photo</li>
+    <ol type="I">
+        <li>url - thumbnail: www.sth.com/GAVassdfSJFKBAFsadfdsg</li>
+        <li>url-icon: www.sth.com/GAVassdfSJFKBAFsadfdsg</li>
+        <li>url-default: www.sth.com/GAVassdfSJFKBAFsadfdsg</li>
+    </ol>
+    <li>Main-Photo</li>
+    <ol type="I">
+        <li>url - thumbnail: www.sth.com/GAVassdfSJFKBAFsadfdsg</li>
+        <li>ur-icon: www.sth.com/GAVassdfSJFKBAFsadfdsg</li>
+        <li>url-default: www.sth.com/GAVassdfSJFKBAFsadfdsg</li>
+    </ol>
+</ul>
+<input type="button" value="Change" onclick="change()">
+</body>
+</html>

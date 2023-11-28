@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zad5 </title>
+    <script type='text/javascript' src='jquery.js'></script>
+    <script type='text/javascript'>
+        currentSizeP = 100
+        currentSizeH1 = 100
+        DesiredSizeI
+        DesiredSizeD
+
+        function restoreOriginal() {
+            $("p").css("fontSize", "100%")
+            $("h1").css("fontSize", "100%")
+            currentSizeP = 100
+            currentSizeH1 = 100
+        }
+        function  increaseR(){
+            if (currentSizeP <= DesiredSizeI) {
+                currentSizeP += 1
+                currentSizeH1 += 1
+                $("p").css("fontSize", currentSizeP + "%")
+                $("h1").css("fontSize", currentSizeH1 + "%")
+                setTimeout("increaseR()", 40)
+            }
+        }
+        function increase() {
+            DesiredSizeI = currentSizeP * 1.5;
+            increaseR()
+        }
+
+        function  decreaseR(){
+            if (currentSizeP >= DesiredSizeD) {
+                currentSizeP -= 1
+                currentSizeH1 -= 1
+                $("p").css("fontSize", currentSizeP + "%")
+                $("h1").css("fontSize", currentSizeH1 + "%")
+                setTimeout("decreaseR()", 40)
+            }
+        }
+        function decrease() {
+            DesiredSizeD = currentSizeP / 1.5;
+            decreaseR()
+        }
+    </script>
+</head>
+<body>
+<div style="background-color: cyan;width: 300px">
+    <div><i>Големина на фонт</i></div>
+    <input type="button" value="Почетна" onclick="restoreOriginal()">
+    <input type="button" value="Зголеми" onclick="increase()">
+    <input type="button" value="Намали" onclick="decrease()">
+</div>
+<h1>How to connect to internet</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+    aliqua. Orci dapibus ultrices in iaculis. Cursus in hac habitasse platea. Sed risus ultricies tristique nulla
+    aliquet enim tortor at auctor. Senectus et netus et malesuada.</p>
+<p>In massa tempor nec feugiat nisl pretium fusce id. Egestas fringilla phasellus faucibus scelerisque eleifend donec
+    pretium vulputate. Sit amet venenatis urna cursus. Mattis ullamcorper velit sed ullamcorper. Nullam ac tortor vitae
+    purus faucibus ornare suspendisse.</p>
+</body>
+</html>
