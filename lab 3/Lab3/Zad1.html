@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memorija</title>
+
+    <style type="text/css">
+        .row {
+            float: left;
+            clear: both;
+            width: 600px;
+        }
+
+        .row div {
+            margin: 10px;
+            height: 100px;
+            width: 100px;
+            padding: 10px;
+            float: left;
+        }
+
+        .TileStart {
+            background: linear-gradient(#1e5799, #7db9e8);
+        }
+
+
+        .TileHover {
+            background: linear-gradient(#3f8a0f, #a2e87d);
+        }
+
+        .disabled{
+            background: #2f302f;
+
+        }
+
+        .row div:hover {
+            cursor: pointer;
+        }
+
+        .row div span {
+            display: none;
+        }
+
+        .row div h2 {
+            text-align: center;
+        }
+    </style>
+
+    <link href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" rel="stylesheet">
+    <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
+            integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c="
+            crossorigin="anonymous"></script>
+    <script>
+        var DATA = ["HTML", "HTML", "CSS", "CSS", "JavaScript", "JavaScript", "JQUERY", "JQUERY", "AJAX", "AJAX", "JASON", "JASON", "XML", "XML", "BOOTSTRAP", "BOOTSTRAP"]
+
+        DATA.sort(() => (Math.random() > .5) ? 1 : -1); //Shuffle
+
+        var openTileFlag = false;
+        var currentOpenTileValue = null;
+        var currentOpenTIleID = null;
+        var score=0
+        var secontOpenTileId=null
+
+        $(document).ready(function () {
+
+
+            allTiles = $('.row div span')
+            for (let i = 0; i < allTiles.length; i++) {
+                allTiles[i].innerHTML = DATA[i];
+            }
+
+            $('.row div').addClass("TileStart")
+                .hover(startToHover, hoverToStart)
+                .click(function () {
+                    thisID = $(this).attr('id')
+                    if (openTileFlag && currentOpenTIleID !== thisID) {
+                        var thisTileValue = $(this).find('span').text();
+                        openTileFlag = false
+                        if (thisTileValue === currentOpenTileValue) {
+                            $(this).addClass("disabled").off('click').off('hover')
+                            $("#"+currentOpenTIleID).addClass("disabled").off('click').off('hover')
+                            toggleView(thisID)
+                            currentOpenTIleID=null
+                            currentOpenTileValue = null
+                            score ++;
+                            if(score>=8){
+                                alert("Congrats, you WON!!!!")
+                            }
+                        } else {
+                            toggleView(thisID)
+                            secontOpenTileId = thisID
+                        }
+                    } else if (!openTileFlag) {
+                        if(secontOpenTileId!=null){
+                            toggleView(currentOpenTIleID)
+                            toggleView(secontOpenTileId)
+                            secontOpenTileId=null;
+                        }
+                        currentOpenTileValue = $(this).find('span').text();
+                        openTileFlag = true;
+                        currentOpenTIleID = thisID;
+                        toggleView(currentOpenTIleID)
+                    }
+                })
+        });
+
+        function startToHover() {
+            $(this).addClass("TileHover");
+            $(this).removeClass("TileStart");
+        }
+
+        function hoverToStart() {
+            $(this).removeClass("TileHover");
+            $(this).addClass("TileStart");
+        }
+
+        function toggleView(ID) {
+            $("#" + ID).find('span').toggle();
+            $("#" + ID).find('h2').toggle();
+        }
+
+    </script>
+</head>
+<body>
+<div class="row">
+    <div id="tile1">
+        <span>TILE 1</span>
+        <h2>1</h2>
+    </div>
+    <div id="tile2">
+        <span>TILE 1</span>
+        <h2>2</h2>
+    </div>
+    <div id="tile3">
+        <span>TILE 1</span>
+        <h2>3</h2>
+    </div>
+    <div id="tile4">
+        <span>TILE 1</span>
+        <h2>4</h2>
+    </div>
+</div>
+<div class="row">
+    <div id="tile5">
+        <span>TILE 1</span>
+        <h2>5</h2>
+    </div>
+    <div id="tile6">
+        <span>TILE 1</span>
+        <h2>6</h2>
+    </div>
+    <div id="tile7">
+        <span>TILE 1</span>
+        <h2>7</h2>
+    </div>
+    <div id="tile8">
+        <span>TILE 1</span>
+        <h2>8</h2>
+    </div>
+</div>
+<div class="row">
+    <div id="tile9">
+        <span>TILE 1</span>
+        <h2>9</h2>
+    </div>
+    <div id="tile10">
+        <span>TILE 1</span>
+        <h2>10</h2>
+    </div>
+    <div id="tile11">
+        <span>TILE 1</span>
+        <h2>11</h2>
+    </div>
+    <div id="tile12">
+        <span>TILE 1</span>
+        <h2>12</h2>
+    </div>
+</div>
+<div class="row">
+    <div id="tile13">
+        <span>TILE 1</span>
+        <h2>13</h2>
+    </div>
+    <div id="tile14">
+        <span>TILE 1</span>
+        <h2>14</h2>
+    </div>
+    <div id="tile15">
+        <span>TILE 1</span>
+        <h2>15</h2>
+    </div>
+    <div id="tile16">
+        <span>TILE 1</span>
+        <h2>16</h2>
+    </div>
+</div>
+
+</body>
+</html>
