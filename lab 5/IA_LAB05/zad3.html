@@ -1,0 +1,81 @@
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <style type="text/css">
+        #feedback {
+            font-size: 1.4em;
+        }
+
+        #selectable .ui-selecting {
+            background: #79fe40;
+        }
+
+        #selectable .ui-selected {
+            background: #21d00c;
+            color: white;
+        }
+
+        #selectable {
+            list-style-type: none;
+            margin: 0 0 40px;
+            padding: 0;
+            width: 300px;
+        }
+
+        #selectable li {
+            margin: 3px;
+            padding: 0.4em;
+            font-size: 1.4em;
+            height: 18px;
+        }
+		#selectedItemsDiv span{
+			margin: 20px 5px;
+			background-color: #75f816;
+		}
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#selectable").selectable({
+                selected: function (event, ui) {
+					selected = $(".ui-selected").text()
+					$("#selectedSpan").text(selected)
+                }
+            });
+            $("#AddBtn").click(function () {
+                itemName = $("#AddInput").val()
+                if (itemName) {
+                    $("#selectable").append("<li class=\"ui-widget-content\">" + itemName + "</li>")
+                }
+            })
+            $("#DeleteBtn").click(function () {
+                $(".ui-selected").remove()
+				$("#selectedSpan").text("")
+            })
+        })
+    </script>
+</head>
+<body>
+<label for="AddInput">New Item:</label>
+<div>
+
+    <input id="AddInput">
+</div>
+
+<button id="AddBtn"> Add new Item</button>
+<button id="DeleteBtn"> Delete selected items</button>
+
+<div id="selectedItemsDiv"><span>Selected Items:</span><span id="selectedSpan"></span></div>
+<ol id="selectable">
+    <li class="ui-widget-content">Item 1 </li>
+    <li class="ui-widget-content">Item 2 </li>
+    <li class="ui-widget-content">Item 3 </li>
+    <li class="ui-widget-content">Item 4 </li>
+    <li class="ui-widget-content">Item 5 </li>
+</ol>
+
+</body>
+</html>

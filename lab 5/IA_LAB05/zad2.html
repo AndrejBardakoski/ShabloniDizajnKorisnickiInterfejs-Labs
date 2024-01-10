@@ -1,0 +1,154 @@
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <style>
+        #feedback {
+            font-size: 1.4em;
+        }
+
+        #selectable .ui-selecting {
+            background: #FECA40;
+        }
+
+        #selectable .ui-selected {
+            background: #F39814;
+            color: white;
+        }
+
+        #selectable {
+            list-style-type: none;
+            margin: 0 0 40px;
+            padding: 0;
+            width: 300px;
+        }
+
+        #selectable li {
+            margin: 3px;
+            padding: 0.4em;
+            font-size: 1.4em;
+            height: 18px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px
+        }
+
+        .borderRed {
+			border: 2px solid red;
+		}
+
+        .errorMsg {
+            color: red;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".errorMsg").hide()
+            $("#selectable").selectable();
+            $("#Date").datepicker();
+            $("#dialog").dialog({
+                autoOpen: false
+            });
+            $("#submit").click(function () {
+                name = $("#Name").val()
+                surname = $("#Surname").val()
+                password = $("#Password").val()
+                date = $("#Date").val()
+				hobbies = $(".ui-selected").text()
+                if (!name) {
+                    $("#Name").addClass("borderRed")
+                    $("#errorName").show()
+                }
+                else{
+					$("#Name").removeClass("borderRed")
+					$("#errorName").hide()
+				}
+                if (!surname) {
+                    $("#Surname").addClass("borderRed")
+                    $("#errorSurname").show()
+                }
+				else{
+					$("#Surname").removeClass("borderRed")
+					$("#errorSurname").hide()
+				}
+                if (!password) {
+                    $("#Password").addClass("borderRed")
+                    $("#errorPassword").show()
+                }
+				else{
+					$("#Password").removeClass("borderRed")
+					$("#errorPassword").hide()
+				}
+                if (!date) {
+                    $("#Date").addClass("borderRed")
+                    $("#errorDate").show()
+                }
+				else{
+					$("#Date").removeClass("borderRed")
+					$("#errorDate").hide()
+				}
+                if (name && surname && password && date) {
+                    $("#nameDialog").text(name)
+                    $("#surnameDialog").text(surname)
+                    $("#passwordDialog").text(password)
+                    $("#dateDialog").text(date)
+                    $("#hobbiesDialog").text(hobbies)
+                    $("#dialog").dialog("open");
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+
+<div>
+    <div>
+        <label for="Name">Name:</label>
+        <input id="Name" placeholder="name">
+        <span class="errorMsg" id="errorName">Insert a name</span>
+    </div>
+    <div>
+        <label for="Surname">Surname:</label>
+        <input id="Surname" placeholder="surname">
+        <span class="errorMsg" id="errorSurname">Insert a surname</span>
+    </div>
+    <div>
+        <label for="Password">Password:</label>
+        <input id="Password" placeholder="Password">
+        <span class="errorMsg" id="errorPassword">Insert a password</span>
+    </div>
+    <div>
+        <label for="Date">DateOfBirth:</label>
+        <input id="Date" placeholder="Date of birth">
+        <span class="errorMsg" id="errorDate">Select a date</span>
+    </div>
+</div>
+<div>
+    <h3>Select your hobbies:</h3>
+    <ol id="selectable">
+        <li class="ui-widget-content">Gaming </li>
+        <li class="ui-widget-content">Sports </li>
+        <li class="ui-widget-content">Watching-TV </li>
+        <li class="ui-widget-content">Hiking </li>
+        <li class="ui-widget-content">Skiing </li>
+        <li class="ui-widget-content">Dancing </li>
+    </ol>
+</div>
+<button id="submit"> Add my Info</button>
+
+<div id="dialog" title="User info">
+    <div>Name:<span id="nameDialog"></span></div>
+    <div>Surname:<span id="surnameDialog"></span></div>
+    <div>Password:<span id="passwordDialog"></span></div>
+    <div>DateOfBirth:<span id="dateDialog"></span></div>
+    <div>Hobbies:<span id="hobbiesDialog"></span></div>
+</div>
+</body>
+</html>
