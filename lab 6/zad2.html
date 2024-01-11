@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zad1</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+    <style>
+        body {
+            width: 350px;
+        }
+
+        label, input {
+            display: block;
+        }
+
+        #Content {
+            display: inline-block;
+            width: 300px;
+            height: 100px;
+            background-color: palegreen;
+        }
+
+        #Send {
+            background-color: #21d00c;
+            font-size: large;
+            color: white;
+        }
+
+        #Insert {
+            background-color: #ffc200;
+            font-size: large;
+            color: white;
+        }
+
+        #inputErrorMsg, #sendErrorMsg {
+            color: red;
+            display: none;
+            font-size: large;
+        }
+
+        section {
+            border: 1px solid black;
+            margin: 20px 0;
+            padding: 20px 10px;
+            height: 350px;
+        }
+
+        #statusBar, #navBar {
+            border: 1px solid black;
+            background-color: lightskyblue;
+            padding: 15px;
+        }
+
+        .step {
+            border-bottom: 3px solid #0a0ac1;
+            padding: 5px;
+            margin: 5px;
+            color: white;
+        }
+
+        .active {
+            background-color: orangered;
+        }
+
+        .passed {
+            background-color: darkgray;
+        }
+
+        .pending {
+            background-color: cornflowerblue;
+        }
+
+        #btnNext, #btnPrevious, #btnDelete {
+            background-color: #ffc200;
+            width: 150px;
+            color: white;
+            font-size: large;
+        }
+
+        #selectable .ui-selecting {
+            background: #FECA40;
+        }
+
+        #selectable .ui-selected {
+            background: #F39814;
+            color: white;
+        }
+
+        #selectable {
+            height: 240px;
+            width: 300px;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: scroll;
+        }
+
+        #selectable li {
+            padding: 0.4em;
+            font-size: 1.2em;
+        }
+
+        #selectable li p {
+            padding: 0;
+            margin: 0;
+        }
+
+    </style>
+    <script>
+        $("document").ready(function () {
+            var password
+
+            // ZAD1
+            $("#passwordDialog").dialog({
+                title: "Set your password",
+                modal: true,
+                buttons: [
+                    {
+                        text: "OK",
+                        click: function () {
+                            var NewPassword = $("#Password").val()
+                            var ConfPassword = $("#ConfPassword").val()
+
+                            if (NewPassword === ConfPassword &&
+                                NewPassword.length >= 6 &&
+                                NewPassword.toString().match(/^(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/)) {
+
+                                $("#inputErrorMsg").hide()
+                                password = NewPassword
+                                $(this).dialog("close");
+                            } else {
+                                $("#inputErrorMsg").show()
+                            }
+                        }
+                    }
+                ]
+            })
+            $("#ContentDialog").dialog({
+                title: "Message content",
+                modal: true,
+                autoOpen: false,
+                buttons: [
+                    {
+                        text: "Insert",
+                        click: function () {
+                            $("#Content").text($("#ContentInput").val())
+                            $(this).dialog("close");
+                        }
+                    },
+                    {
+                        text: "Clear",
+                        click: function () {
+                            $("#ContentInput").val("")
+                        }
+                    }
+                ]
+            })
+            $("#Insert").click(function () {
+                $("#toContentDialog").text($("#To").val())
+                $("#CcContentDialog").text($("#Cc").val())
+                $("#subjectContentDialog").text($("#Subject").val())
+                $("#ContentDialog").dialog("open")
+            })
+            $("#sendDialog").dialog({
+                title: "Password",
+                modal: true,
+                autoOpen: false,
+                buttons: [
+                    {
+                        text: "Ok",
+                        click: function () {
+                            var passwordEntered = $("#sendPassword").val()
+
+                            if (password === passwordEntered) {
+                                $("#sendErrorMsg").hide()
+                                $("<li>").append($("<p>").text("To: "+$("#To").val()))
+                                    .append($("<p>").text("Subject: "+$("#Subject").val()))
+                                    .prependTo($("#selectable"))
+
+                                $(this).dialog("close");
+                            } else {
+                                $("#sendErrorMsg").show()
+                            }
+                        }
+                    }
+                ]
+            })
+            $("#Send").click(function () {
+                $("#sendDialog").dialog("open")
+            })
+
+            //ZAD2
+            $("#sentSection").hide()
+            $("#doneSection").hide()
+
+            var currentStep = 0
+            $("#btnNext").click(function () {
+                if (currentStep === 0) {
+                    $("#emailSection").hide()
+                    $("#sentSection").show()
+                    $("#EmailWizStep").addClass("passed").removeClass("active")
+                    $("#SendWizStep").addClass("active").removeClass("pending")
+                    currentStep += 1
+                } else if (currentStep === 1) {
+                    $("#sentSection").hide()
+                    $("#doneSection").show()
+                    $("#SendWizStep").addClass("passed").removeClass("active")
+                    $("#DoneWizStep").addClass("active").removeClass("pending")
+                    currentStep += 1
+                }
+            })
+            $("#btnPrevious").click(function () {
+                if (currentStep === 2) {
+                    $("#doneSection").hide()
+                    $("#sentSection").show()
+                    $("#DoneWizStep").addClass("pending").removeClass("active")
+                    $("#SendWizStep").addClass("active").removeClass("passed")
+                    currentStep -= 1
+                } else if (currentStep === 1) {
+                    $("#sentSection").hide()
+                    $("#emailSection").show()
+                    $("#SendWizStep").addClass("pending").removeClass("active")
+                    $("#EmailWizStep").addClass("active").removeClass("passed")
+                    currentStep -= 1
+                }
+            })
+
+            $("#selectable").selectable();
+
+            $("#btnDelete").click(function () {
+                $(".ui-selected").remove()
+            })
+
+
+        })
+    </script>
+</head>
+<body>
+<div id="statusBar">
+    <span class="step active" id="EmailWizStep">Email</span>
+    <span class="step pending" id="SendWizStep">Sent</span>
+    <span class="step pending" id="DoneWizStep">Done</span>
+</div>
+<section id="emailSection">
+    <h1>New message:</h1>
+    <label for="To">To:</label>
+    <input id="To">
+    <label for="Cc">Cc:</label>
+    <input id="Cc">
+    <label for="Subject">Subject:</label>
+    <input id="Subject">
+    <label for="Content">Content:</label>
+    <span id="Content"></span>
+    <div>
+        <button id="Insert">Insert</button>
+        <button id="Send">Send</button>
+    </div>
+    <div id="passwordDialog">
+        <p id="inputErrorMsg">Password error!</p>
+        <label for="Password">New Password:</label>
+        <input id="Password" type="password">
+        <label for="ConfPassword">Repeat Password:</label>
+        <input id="ConfPassword" type="password">
+    </div>
+    <div id="ContentDialog">
+        <p>To:<span id="toContentDialog"></span></p>
+        <p>Subject:<span id="subjectContentDialog"></span></p>
+        <p>Cc:<span id="CcContentDialog"></span></p>
+        <label for="ContentInput">Content</label>
+        <textarea id="ContentInput" rows="8"></textarea>
+    </div>
+    <div id="sendDialog">
+        <p id="sendErrorMsg">Password error!</p>
+        <label for="sendPassword">Password:</label>
+        <input id="sendPassword" type="password">
+    </div>
+</section>
+<section id="sentSection">
+    <h1>Sent items:</h1>
+    <ol id="selectable">
+        <li class="ui-widget-content">
+            <p>To: Email</p>
+            <p>Subject: SBJ</p>
+        </li>
+    </ol>
+    <button id="btnDelete">Delete</button>
+</section>
+<section id="doneSection">
+    <h1>DONE</h1>
+</section>
+<div id="navBar">
+    <button id="btnPrevious">Previous</button>
+    <button id="btnNext">Next</button>
+</div>
+</body>
+</html>

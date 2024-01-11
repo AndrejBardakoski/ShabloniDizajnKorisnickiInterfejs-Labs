@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zad1</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+    <style>
+        label, input {
+            display: block;
+        }
+
+        #Content {
+            display: inline-block;
+            width: 300px;
+            height: 100px;
+            background-color: palegreen;
+        }
+
+        #Send {
+            background-color: #21d00c;
+            font-size: large;
+            color: white;
+        }
+
+        #Insert {
+            background-color: #ffc200;
+            font-size: large;
+            color: white;
+        }
+
+        #inputErrorMsg, #sendErrorMsg {
+            color: red;
+            display: none;
+            font-size: large;
+        }
+    </style>
+    <script>
+        $("document").ready(function () {
+            var password
+
+            $("#passwordDialog").dialog({
+                title: "Set your password",
+                modal: true,
+                buttons: [
+                    {
+                        text: "OK",
+                        click: function () {
+                            var NewPassword = $("#Password").val()
+                            var ConfPassword = $("#ConfPassword").val()
+
+                            if (NewPassword === ConfPassword &&
+                                NewPassword.length >= 6 &&
+                                NewPassword.toString().match(/^(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/)) {
+
+                                $("#inputErrorMsg").hide()
+                                password = NewPassword
+                                $(this).dialog("close");
+                            } else {
+                                $("#inputErrorMsg").show()
+                            }
+                        }
+                    }
+                ]
+            })
+            $("#ContentDialog").dialog({
+                title: "Message content",
+                modal: true,
+                autoOpen: false,
+                buttons: [
+                    {
+                        text: "Insert",
+                        click: function () {
+                            $("#Content").text($("#ContentInput").val())
+                            $(this).dialog("close");
+                        }
+                    },
+                    {
+                        text: "Clear",
+                        click: function () {
+                            $("#ContentInput").val("")
+                        }
+                    }
+                ]
+            })
+            $("#Insert").click(function () {
+                $("#toContentDialog").text($("#To").val())
+                $("#CcContentDialog").text($("#Cc").val())
+                $("#subjectContentDialog").text($("#Subject").val())
+                $("#ContentDialog").dialog("open")
+            })
+            $("#sendDialog").dialog({
+                title: "Password",
+                modal: true,
+                autoOpen: false,
+                buttons: [
+                    {
+                        text: "Ok",
+                        click: function () {
+                            var passwordEntered = $("#sendPassword").val()
+
+                            if (password===passwordEntered) {
+                                $("#sendErrorMsg").hide()
+                                $(this).dialog("close");
+                            } else {
+                                $("#sendErrorMsg").show()
+                            }
+                        }
+                    }
+                ]
+            })
+            $("#Send").click(function () {
+                $("#sendDialog").dialog("open")
+            })
+        })
+    </script>
+</head>
+<body>
+<h1>New message:</h1>
+<label for="To">To:</label>
+<input id="To">
+<label for="Cc">Cc:</label>
+<input id="Cc">
+<label for="Subject">Subject:</label>
+<input id="Subject">
+<label for="Content">Content:</label>
+<span id="Content"></span>
+<div>
+    <button id="Insert">Insert</button>
+    <button id="Send">Send</button>
+</div>
+<div id="passwordDialog">
+    <p id="inputErrorMsg">Password error!</p>
+    <label for="Password">New Password:</label>
+    <input id="Password" type="password">
+    <label for="ConfPassword">Repeat Password:</label>
+    <input id="ConfPassword" type="password">
+</div>
+<div id="ContentDialog">
+    <p>To:<span id="toContentDialog"></span></p>
+    <p>Subject:<span id="subjectContentDialog"></span></p>
+    <p>Cc:<span id="CcContentDialog"></span></p>
+    <label for="ContentInput">Content</label>
+    <textarea id="ContentInput" rows="8"></textarea>
+</div>
+<div id="sendDialog">
+    <p id="sendErrorMsg">Password error!</p>
+    <label for="sendPassword">Password:</label>
+    <input id="sendPassword" type="password">
+</div>
+</body>
+</html>
