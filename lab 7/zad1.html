@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zad1</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+    <style>
+        #nav {
+            border: 1px solid black;
+            background-color: lightskyblue;
+            padding: 15px;
+        }
+
+        .navBtn {
+            padding: 5px;
+            margin: 5px;
+            color: white;
+            background-color: darkgray;
+            font-size: large;
+        }
+
+        .active {
+            background-color: orangered;
+        }
+
+        .floatRight {
+            float: right;
+        }
+
+        body {
+            width: 1000px;
+        }
+
+        .listContainer {
+            margin: 10px 25px;
+            display: inline-block;
+            width: 405px;
+            vertical-align: top;
+        }
+
+        ul {
+            background-color: #eeeeee;
+            list-style-type: none;
+            margin: 0;
+            padding: 10px 10px 1px;
+        }
+
+        .item {
+            margin: 0 0 10px 0;
+            padding: 3px;
+            border: 1px solid black;
+            background-color: #f1ecec;
+            /*background-color: white;*/
+        }
+
+        .itemImg {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            vertical-align: top;
+        }
+
+        .itemTxt {
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 20px;
+            width: 250px;
+        }
+
+        .itemTitle {
+            font-size: xx-large;
+            margin: 0 5px 10px 0;
+            padding: 0;
+        }
+
+        .itemDesc {
+            margin: 5px;
+        }
+
+    </style>
+    <script>
+        $("document").ready(function () {
+            $("#sCartSortable").sortable({
+                connectWith: "#playersSortable, #mixersSortable",
+                items: "li:not(#sCartPlaceholder)"
+            })
+            $("#playersSortable, #mixersSortable").sortable({
+                connectWith: "#sCartSortable"
+            })
+
+            $("#mixers").hide()
+            $("#playersBtn").click(function () {
+                $(".navBtn").removeClass("active")
+                $(this).addClass("active")
+                $("#mixers").hide()
+                $("#players").show()
+                $("#sCart").addClass("floatRight")
+            })
+            $("#mixersBtn").click(function () {
+                $(".navBtn").removeClass("active")
+                $(this).addClass("active")
+                $("#players").hide()
+                $("#mixers").show()
+                $("#sCart").addClass("floatRight")
+            })
+            $("#sCartBtn").click(function () {
+                $(".navBtn").removeClass("active")
+                $(this).addClass("active")
+                $("#mixers").hide()
+                $("#players").hide()
+                $("#sCart").removeClass("floatRight")
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="nav">
+    <button class="navBtn active" id="playersBtn">CD Players</button>
+    <button class="navBtn" id="mixersBtn">Mixers</button>
+    <button class="navBtn floatRight" id="sCartBtn">Shopping cart</button>
+</div>
+<div class="listContainer" id="players">
+    <h1>CD players</h1>
+    <ul id="playersSortable">
+        <li class="item">
+            <img class="itemImg" src="https://m.media-amazon.com/images/I/61VDELllCqL._AC_UY218_.jpg"
+                 alt="Image of CD player">
+            <div class="itemTxt">
+                <p class="itemTitle">GPX</p>
+                <p class="itemDesc">PC332B Portable CD Player with Anti-Skip Protection, FM Radio and Stereo Earbuds -
+                    Black</p>
+            </div>
+        </li>
+        <li class="item">
+            <img class="itemImg" src="https://m.media-amazon.com/images/I/61efVx-ukIL._AC_UY218_.jpg"
+                 alt="Image of CD player">
+            <div class="itemTxt">
+                <p class="itemTitle">GPX</p>
+                <p class="itemDesc">PCB319B Portable Cd Player with Bluetooth, Includes Stereo Earbuds, Black</p>
+            </div>
+        </li>
+        <li class="item">
+            <img class="itemImg" src="https://m.media-amazon.com/images/I/71DqIy8lXgL._AC_UY218_.jpg"
+                 alt="Image of CD player">
+            <div class="itemTxt">
+                <p class="itemTitle">Deluxe Products</p>
+                <p class="itemDesc">CD Player Portable with 60 Second Anti Skip, Stereo Earbuds, Includes Aux in Cable
+                    and AC USB Power Cable for use at Home or in Car
+                </p>
+            </div>
+        </li>
+        <li class="item">
+            <img class="itemImg" src="https://m.media-amazon.com/images/I/61yQTMS14UL._AC_UY218_.jpg"
+                 alt="Image of CD player">
+            <div class="itemTxt">
+                <p class="itemTitle">BYRONSTATICS</p>
+                <p class="itemDesc">Portable Disc CD player, Personal Walkman Music Anti-Skip Shockproof Protection,
+                    Lightweight, Headphones Jack, Powered DC or 2XAA Battery - Pink</p>
+            </div>
+        </li>
+        <li class="item">
+            <img class="itemImg" src="https://m.media-amazon.com/images/I/91Ml9yMX6GL._AC_UY218_.jpg"
+                 alt="Image of CD player">
+            <div class="itemTxt">
+                <p class="itemTitle">Toshiba</p>
+                <p class="itemDesc">TY-CWU700 Vintage Style Retro Look Micro Component Wireless Bluetooth Audio
+                    Streaming & CD Player Wood Speaker System + Remote, USB Port for MP3 Playback, FM Stereo Digital
+                    Tuner, AUX Input</p>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="listContainer" id="mixers">
+    <h1>Mixers</h1>
+    <ul id="mixersSortable">
+        <li class="item">
+            <img class="itemImg" src="https://m.media-amazon.com/images/I/81SBdWNu-nS._AC_UL320_.jpg"
+                 alt="Image of mixer">
+            <div class="itemTxt">
+                <p class="itemTitle">Pyle</p>
+                <p class="itemDesc">Professional Audio Mixer Sound Board Console - Desk System Interface with 6 Channel,
+                    USB, Bluetooth, Digital MP3 Computer</p>
+            </div>
+        </li>
+        <li class="item">
+            <img class="itemImg" src="https://m.media-amazon.com/images/I/81e2UAxI93L._AC_UL320_.jpg"
+                 alt="Image of mixer">
+            <div class="itemTxt">
+                <p class="itemTitle">Numark</p>
+                <p class="itemDesc">Party Mix II - DJ Controller with Party Lights, DJ Set with 2 Decks, DJ Mixer, Audio
+                    Interface and USB Connectivity</p>
+            </div>
+        </li>
+        <li class="item">
+            <img class="itemImg" src="https://m.media-amazon.com/images/I/91pcm9OkHSL._AC_UL320_.jpg"
+                 alt="Image of mixer">
+            <div class="itemTxt">
+                <p class="itemTitle">YAMAHA</p>
+                <p class="itemDesc">MG06 6-Input Compact Stereo Mixer</p>
+            </div>
+        </li>
+        <li class="item">
+            <img class="itemImg" src="https://m.media-amazon.com/images/I/91jpZmLFW+L._AC_UL320_.jpg"
+                 alt="Image of mixer">
+            <div class="itemTxt">
+                <p class="itemTitle">Pyle</p>
+                <p class="itemDesc">Professional Audio Mixer Sound Board Console Desk System Interface 8 Channel Digital
+                    USB Bluetooth MP3 Computer Input 48V Phantom Pow</p>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="listContainer floatRight" id="sCart">
+    <h1>Shopping Cart</h1>
+    <ul id="sCartSortable">
+        <li class="item" id="sCartPlaceholder">Fill me up!</li>
+    </ul>
+</div>
+</body>
+</html>
