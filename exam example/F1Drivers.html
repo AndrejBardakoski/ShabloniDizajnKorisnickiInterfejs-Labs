@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>F1Drivers</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+    <style>
+        #favoritesContainer {
+            display: inline-block;
+            width: 600px;
+        }
+
+        #detailsView {
+            display: inline-block;
+            width: 300px;
+            vertical-align: top;
+
+        }
+
+        ul {
+            background-color: #ececec;
+            display: inline-block;
+            width: 250px;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            vertical-align: top;
+        }
+
+        ul li {
+            margin: 0 3px 3px 3px;
+            padding: 0.4em;
+            padding-left: 1.5em;
+            height: 18px;
+        }
+        #socialLinks{
+            display: inline-block;
+            background-color: #efeded;
+            margin: 200px 30px 0 30px
+        }
+        #socialLinks a{
+            margin: 5px;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#2017, #2018").sortable({
+                connectWith: "#favorites"
+            })
+            $("#favorites").sortable({
+                connectWith: "#2017, #2018",
+                items: "li:not(#placeholder)"
+            });
+
+            function get_data(year) {
+                $.ajax({
+                    url: "http://ergast.com/api/f1/" + year + "/drivers.json?limit=10",
+                    dataType: "json",
+                    success: function (data) {
+                        $.each(data.MRData.DriverTable.Drivers, function (i, item) {
+                            $("<li>").text(item.givenName + " " + item.familyName)
+                                .appendTo($("#" + year)).addClass("ui-state-default")
+                                .attr("nationality", item.nationality)
+                                .attr("dateOfBirth", item.dateOfBirth)
+                                .attr("permanentNumber", item.permanentNumber)
+                                .attr("url", item.url)
+                                .attr("id",year+"driver"+i)
+                        })
+                    }
+                })
+            }
+
+            get_data(2017)
+            get_data(2018)
+
+            $(document).on("click", "#favorites li:not(#placeholder)", function () {
+                if($("#detailsView").attr("driverId")===$(this).attr("id")){
+                    $("#detailsView").toggle()
+                    return
+                }
+                $("#detailsView").show().attr("driverId", $(this).attr("id"))
+                $("#driverName").text($(this).text())
+                $("#driverNat").text($(this).attr("nationality"))
+                $("#driverBDay").text($(this).attr("dateOfBirth"))
+                $("#driverNum").text($(this).attr("permanentNumber"))
+                $("#driverUrl").attr("href", ($(this).attr("url")))
+            })
+            $("#detailsView").hide()
+        })
+    </script>
+</head>
+<body>
+<ul id="2017">
+</ul>
+<ul id="2018">
+
+</ul>
+<div id="favoritesContainer">
+    <ul id="favorites">
+        <li class="ui-state-default" id="placeholder">Drag yor favorite drivers here</li>
+    </ul>
+    <div  id="detailsView" driverId="-1">
+        <div>Driver: <span id="driverName"></span></div>
+        <div>Nationality: <span id="driverNat"></span></div>
+        <div>Date of birth: <span id="driverBDay"></span></div>
+        <div>Permanent number: <span id="driverNum"></span></div>
+        <div><a id="driverUrl" href="">more info</a></div>
+    </div>
+</div>
+<div id="socialLinks">
+    <a href="http://www.delicious.com/"><img src="images/delicious.png" height="48" width="48"/></a>
+    <a href="http://digg.com/"><img src="images/digg.png" height="48" width="48"/></a>
+    <a href="http://www.facebook.com/"><img src="images/facebook.png" height="48" width="48"/></a>
+    <a href="http://www.flickr.com/"><img src="images/flickr.png" height="48" width="48"/></a>
+    <a href="http://www.linkedin.com/"><img src="images/linkedin.png" height="48" width="48"/></a>
+    <a href="http://www.reddit.com/"><img src="images/reddit.png" height="48" width="48"/></a>
+    <a href="http://feeds2.feedburner.com/marcofolio"><img src="images/rss.png" height="48" width="48"/></a>
+    <a href="http://twitter.com/"><img src="images/twitter.png" height="48" width="48"/></a>
+</div>
+</body>
+</html>
